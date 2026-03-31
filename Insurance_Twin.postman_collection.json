@@ -1,0 +1,1355 @@
+{
+  "info": {
+    "name": "Insurance Twin API",
+    "description": "Digital Twin for Insurance App - India",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080", "type": "string" },
+    { "key": "customer_id", "value": "", "type": "string" },
+    { "key": "customer2_id", "value": "", "type": "string" },
+    { "key": "plan_id", "value": "", "type": "string" },
+    { "key": "plan2_id", "value": "", "type": "string" },
+    { "key": "benefit_opd_id", "value": "", "type": "string" },
+    { "key": "benefit_pharmacy_id", "value": "", "type": "string" },
+    { "key": "benefit_lab_id", "value": "", "type": "string" },
+    { "key": "benefit_hosp_id", "value": "", "type": "string" },
+    { "key": "benefit_maternity_id", "value": "", "type": "string" },
+    { "key": "benefit_wellness_id", "value": "", "type": "string" },
+    { "key": "policy_id", "value": "", "type": "string" },
+    { "key": "policy2_id", "value": "", "type": "string" },
+    { "key": "dependant_spouse_id", "value": "", "type": "string" },
+    { "key": "dependant_son_id", "value": "", "type": "string" },
+    { "key": "dependant_father_id", "value": "", "type": "string" },
+    { "key": "nominee1_id", "value": "", "type": "string" },
+    { "key": "nominee2_id", "value": "", "type": "string" },
+    { "key": "claim1_id", "value": "", "type": "string" },
+    { "key": "claim2_id", "value": "", "type": "string" },
+    { "key": "claim3_id", "value": "", "type": "string" },
+    { "key": "claim4_id", "value": "", "type": "string" },
+    { "key": "claim5_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create Customer - Rajesh Kumar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('customer_id', json.id);",
+                  "pm.test('Status is 201', function() { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Rajesh Kumar\",\n  \"email\": \"rajesh.kumar@gmail.com\",\n  \"phone\": \"9876543210\",\n  \"date_of_birth\": \"1990-05-15\",\n  \"gender\": \"male\",\n  \"pan_number\": \"ABCDE1234F\",\n  \"aadhaar_number\": \"123456789012\",\n  \"address_line1\": \"42, MG Road, Indiranagar\",\n  \"address_line2\": \"Near Metro Station\",\n  \"city\": \"Bengaluru\",\n  \"state\": \"Karnataka\",\n  \"pincode\": \"560038\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers"]
+            }
+          }
+        },
+        {
+          "name": "Create Customer - Sneha Sharma",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('customer2_id', json.id);",
+                  "pm.test('Status is 201', function() { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Sneha Sharma\",\n  \"email\": \"sneha.sharma@gmail.com\",\n  \"phone\": \"9123456789\",\n  \"date_of_birth\": \"1985-11-20\",\n  \"gender\": \"female\",\n  \"pan_number\": \"FGHIJ5678K\",\n  \"aadhaar_number\": \"998877665544\",\n  \"address_line1\": \"15, Bandra West\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"pincode\": \"400050\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers"]
+            }
+          }
+        },
+        {
+          "name": "List All Customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Customer - Rajesh",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"9988776655\",\n  \"address_line1\": \"100, Koramangala 5th Block\",\n  \"city\": \"Bengaluru\",\n  \"pincode\": \"560095\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Customer - Sneha",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/customers/{{customer2_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "customers", "{{customer2_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Insurance Plans",
+      "item": [
+        {
+          "name": "Create Plan - Star Health Gold",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('plan_id', json.id);",
+                  "pm.test('Status is 201', function() { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Star Health Gold\",\n  \"plan_type\": \"health\",\n  \"insurer_name\": \"Star Health Insurance\",\n  \"description\": \"Comprehensive health plan with OPD, pharmacy, lab tests and hospitalization cover for individuals and families\",\n  \"base_premium_annual\": 12000.00,\n  \"sum_insured\": 500000.00,\n  \"min_age\": 18,\n  \"max_age\": 65,\n  \"coverage_duration_months\": 12,\n  \"waiting_period_days\": 30\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans"]
+            }
+          }
+        },
+        {
+          "name": "Create Plan - HDFC Life Protect",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('plan2_id', json.id);",
+                  "pm.test('Status is 201', function() { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"HDFC Life Protect\",\n  \"plan_type\": \"life\",\n  \"insurer_name\": \"HDFC Life Insurance\",\n  \"description\": \"Term life insurance with accidental death and critical illness rider\",\n  \"base_premium_annual\": 8500.00,\n  \"sum_insured\": 10000000.00,\n  \"min_age\": 21,\n  \"max_age\": 60,\n  \"coverage_duration_months\": 240,\n  \"waiting_period_days\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans"]
+            }
+          }
+        },
+        {
+          "name": "List Active Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans"]
+            }
+          }
+        },
+        {
+          "name": "Get Plan by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans/{{plan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans", "{{plan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Plan - Increase Premium",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_premium_annual\": 13500.00,\n  \"is_active\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans/{{plan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans", "{{plan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Plan - HDFC Life",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plans/{{plan2_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plans", "{{plan2_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plan Benefits",
+      "item": [
+        {
+          "name": "Create Benefit - OPD Consultation (3/year)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_opd_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"OPD Consultation\",\n  \"benefit_category\": \"opd\",\n  \"description\": \"Outpatient doctor consultation at network hospitals and clinics\",\n  \"max_usage_per_year\": 3,\n  \"max_amount_per_usage\": 1000.00,\n  \"max_amount_per_year\": 3000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "Create Benefit - Pharmacy (12/year)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_pharmacy_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"Pharmacy\",\n  \"benefit_category\": \"pharmacy\",\n  \"description\": \"Prescribed medicines from network pharmacies across India\",\n  \"max_usage_per_year\": 12,\n  \"max_amount_per_usage\": 2000.00,\n  \"max_amount_per_year\": 15000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "Create Benefit - Lab Test (6/year)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_lab_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"Lab Test\",\n  \"benefit_category\": \"lab\",\n  \"description\": \"Diagnostic lab tests including blood work, imaging, and pathology\",\n  \"max_usage_per_year\": 6,\n  \"max_amount_per_usage\": 3000.00,\n  \"max_amount_per_year\": 10000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "Create Benefit - Hospitalization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_hosp_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"Hospitalization\",\n  \"benefit_category\": \"inpatient\",\n  \"description\": \"Inpatient hospitalization including room rent, ICU, surgery, and post-op care\",\n  \"max_amount_per_year\": 500000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 30\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "Create Benefit - Maternity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_maternity_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"Maternity Cover\",\n  \"benefit_category\": \"maternity\",\n  \"description\": \"Normal and C-section delivery, pre and post natal expenses\",\n  \"max_amount_per_year\": 75000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 270\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "Create Benefit - Annual Health Checkup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('benefit_wellness_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"{{plan_id}}\",\n  \"benefit_name\": \"Annual Health Checkup\",\n  \"benefit_category\": \"wellness\",\n  \"description\": \"Preventive annual health checkup at network diagnostic centres\",\n  \"max_usage_per_year\": 1,\n  \"max_amount_per_usage\": 5000.00,\n  \"max_amount_per_year\": 5000.00,\n  \"is_cashless\": true,\n  \"waiting_period_days\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits"]
+            }
+          }
+        },
+        {
+          "name": "List Benefits by Plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits/by-plan/{{plan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits", "by-plan", "{{plan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Benefit by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits/{{benefit_opd_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits", "{{benefit_opd_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Benefit - Maternity",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/plan-benefits/{{benefit_maternity_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "plan-benefits", "{{benefit_maternity_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Policies (Purchase)",
+      "item": [
+        {
+          "name": "Purchase Policy - Rajesh buys Star Health Gold",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('policy_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_number\": \"SHG-2024-000001\",\n  \"customer_id\": \"{{customer_id}}\",\n  \"plan_id\": \"{{plan_id}}\",\n  \"premium_amount\": 13500.00,\n  \"sum_insured\": 500000.00,\n  \"start_date\": \"2024-04-01\",\n  \"end_date\": \"2025-03-31\",\n  \"payment_frequency\": \"annual\",\n  \"auto_renew\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies"]
+            }
+          }
+        },
+        {
+          "name": "Purchase Policy - Sneha buys HDFC Life",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('policy2_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_number\": \"HLP-2024-000001\",\n  \"customer_id\": \"{{customer2_id}}\",\n  \"plan_id\": \"{{plan2_id}}\",\n  \"premium_amount\": 8500.00,\n  \"sum_insured\": 10000000.00,\n  \"start_date\": \"2024-01-01\",\n  \"end_date\": \"2044-01-01\",\n  \"payment_frequency\": \"annual\",\n  \"auto_renew\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies"]
+            }
+          }
+        },
+        {
+          "name": "List All Policies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies"]
+            }
+          }
+        },
+        {
+          "name": "Get Policy by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies", "{{policy_id}}"]
+            }
+          }
+        },
+        {
+          "name": "List Policies by Customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies/by-customer/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies", "by-customer", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Policy - Change to Monthly",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_frequency\": \"monthly\",\n  \"auto_renew\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/policies/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "policies", "{{policy_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dependants",
+      "item": [
+        {
+          "name": "Add Dependant - Spouse (Priya)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('dependant_spouse_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Priya Kumar\",\n  \"relationship\": \"spouse\",\n  \"date_of_birth\": \"1992-08-20\",\n  \"gender\": \"female\",\n  \"aadhaar_number\": \"987654321012\",\n  \"is_primary_insured\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants"]
+            }
+          }
+        },
+        {
+          "name": "Add Dependant - Son (Arjun)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('dependant_son_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Arjun Kumar\",\n  \"relationship\": \"son\",\n  \"date_of_birth\": \"2018-03-10\",\n  \"gender\": \"male\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants"]
+            }
+          }
+        },
+        {
+          "name": "Add Dependant - Father (Suresh)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('dependant_father_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Suresh Kumar\",\n  \"relationship\": \"father\",\n  \"date_of_birth\": \"1960-01-05\",\n  \"gender\": \"male\",\n  \"aadhaar_number\": \"112233445566\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants"]
+            }
+          }
+        },
+        {
+          "name": "Add Dependant - Mother (Kamala)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Kamala Kumar\",\n  \"relationship\": \"mother\",\n  \"date_of_birth\": \"1963-07-12\",\n  \"gender\": \"female\",\n  \"aadhaar_number\": \"665544332211\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants"]
+            }
+          }
+        },
+        {
+          "name": "List Dependants by Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants/by-policy/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants", "by-policy", "{{policy_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Dependant by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants/{{dependant_spouse_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants", "{{dependant_spouse_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Dependant - Father",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/dependants/{{dependant_father_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dependants", "{{dependant_father_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nominees",
+      "item": [
+        {
+          "name": "Add Nominee - Priya (60%)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('nominee1_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Priya Kumar\",\n  \"relationship\": \"spouse\",\n  \"date_of_birth\": \"1992-08-20\",\n  \"share_percentage\": 60.00,\n  \"phone\": \"9876543211\",\n  \"email\": \"priya.kumar@gmail.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/nominees",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nominees"]
+            }
+          }
+        },
+        {
+          "name": "Add Nominee - Arjun (40%)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('nominee2_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"full_name\": \"Arjun Kumar\",\n  \"relationship\": \"son\",\n  \"date_of_birth\": \"2018-03-10\",\n  \"share_percentage\": 40.00\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/nominees",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nominees"]
+            }
+          }
+        },
+        {
+          "name": "List Nominees by Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nominees/by-policy/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nominees", "by-policy", "{{policy_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Nominee by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nominees/{{nominee1_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nominees", "{{nominee1_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Nominee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nominees/{{nominee1_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nominees", "{{nominee1_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Claims",
+      "item": [
+        {
+          "name": "Submit Claim - OPD (Rajesh himself)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('claim1_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_number\": \"CLM-2024-000001\",\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_opd_id}}\",\n  \"claim_type\": \"cashless\",\n  \"claim_amount\": 800.00,\n  \"diagnosis_summary\": \"General physician consultation for seasonal fever and cold\",\n  \"hospital_name\": \"Apollo Clinic, Indiranagar, Bengaluru\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "Submit Claim - Lab Test",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('claim2_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_number\": \"CLM-2024-000002\",\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_lab_id}}\",\n  \"claim_type\": \"cashless\",\n  \"claim_amount\": 2500.00,\n  \"diagnosis_summary\": \"Complete blood count, thyroid panel, and lipid profile\",\n  \"hospital_name\": \"SRL Diagnostics, Koramangala\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "Submit Claim - Hospitalization (Son Arjun)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('claim3_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_number\": \"CLM-2024-000003\",\n  \"policy_id\": \"{{policy_id}}\",\n  \"claimant_dependant_id\": \"{{dependant_son_id}}\",\n  \"benefit_id\": \"{{benefit_hosp_id}}\",\n  \"claim_type\": \"cashless\",\n  \"claim_amount\": 85000.00,\n  \"diagnosis_summary\": \"Dengue fever - 3 day hospitalization with platelet transfusion\",\n  \"hospital_name\": \"Manipal Hospital, Old Airport Road, Bengaluru\",\n  \"admission_date\": \"2024-07-10\",\n  \"discharge_date\": \"2024-07-13\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "Submit Claim - Pharmacy Reimbursement",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('claim4_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_number\": \"CLM-2024-000004\",\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_pharmacy_id}}\",\n  \"claim_type\": \"reimbursement\",\n  \"claim_amount\": 1450.00,\n  \"diagnosis_summary\": \"Prescribed medicines: antibiotics, paracetamol, multivitamins\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "Submit Claim - OPD for Spouse (Priya)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('claim5_id', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_number\": \"CLM-2024-000005\",\n  \"policy_id\": \"{{policy_id}}\",\n  \"claimant_dependant_id\": \"{{dependant_spouse_id}}\",\n  \"benefit_id\": \"{{benefit_opd_id}}\",\n  \"claim_type\": \"cashless\",\n  \"claim_amount\": 900.00,\n  \"diagnosis_summary\": \"Dermatology consultation for skin allergy\",\n  \"hospital_name\": \"Fortis Clinic, Bannerghatta Road\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "List All Claims",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims"]
+            }
+          }
+        },
+        {
+          "name": "Get Claim by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim1_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim1_id}}"]
+            }
+          }
+        },
+        {
+          "name": "List Claims by Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/by-policy/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "by-policy", "{{policy_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Claim #1 (OPD)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"approved_amount\": 800.00,\n  \"reviewed_at\": \"2024-06-16T10:30:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim1_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim1_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Settle Claim #1 (OPD)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"settled\",\n  \"settled_at\": \"2024-06-17T14:00:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim1_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim1_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Claim #2 (Lab)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"approved_amount\": 2500.00,\n  \"reviewed_at\": \"2024-06-18T09:00:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim2_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim2_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Claim #3 (Hospitalization)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"approved_amount\": 82000.00,\n  \"reviewed_at\": \"2024-07-15T11:00:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim3_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim3_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Reject Claim #4 (Pharmacy - missing prescription)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"rejected\",\n  \"rejection_reason\": \"Original prescription not attached. Please resubmit with doctor prescription.\",\n  \"reviewed_at\": \"2024-06-20T15:30:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim4_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim4_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Claim #5 (OPD Spouse)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"approved_amount\": 900.00,\n  \"reviewed_at\": \"2024-06-22T10:00:00\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/claims/{{claim5_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "claims", "{{claim5_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Benefit Usages",
+      "item": [
+        {
+          "name": "Record Usage - OPD Visit 1 (Rajesh)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_opd_id}}\",\n  \"claim_id\": \"{{claim1_id}}\",\n  \"usage_date\": \"2024-06-15\",\n  \"amount_used\": 800.00,\n  \"notes\": \"OPD visit 1 of 3 - general physician consultation\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages"]
+            }
+          }
+        },
+        {
+          "name": "Record Usage - OPD Visit 2 (Priya)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_opd_id}}\",\n  \"claim_id\": \"{{claim5_id}}\",\n  \"usage_date\": \"2024-06-22\",\n  \"amount_used\": 900.00,\n  \"notes\": \"OPD visit 2 of 3 - dermatology consultation (spouse)\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages"]
+            }
+          }
+        },
+        {
+          "name": "Record Usage - Lab Test",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_lab_id}}\",\n  \"claim_id\": \"{{claim2_id}}\",\n  \"usage_date\": \"2024-06-18\",\n  \"amount_used\": 2500.00,\n  \"notes\": \"Lab test 1 of 6 - CBC, thyroid, lipid profile\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages"]
+            }
+          }
+        },
+        {
+          "name": "Record Usage - Hospitalization",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_id\": \"{{policy_id}}\",\n  \"benefit_id\": \"{{benefit_hosp_id}}\",\n  \"claim_id\": \"{{claim3_id}}\",\n  \"usage_date\": \"2024-07-13\",\n  \"amount_used\": 82000.00,\n  \"notes\": \"Hospitalization - dengue treatment for son Arjun\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages"]
+            }
+          }
+        },
+        {
+          "name": "List Benefit Usages by Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages/by-policy/{{policy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages", "by-policy", "{{policy_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Usage Summary - OPD (2 of 3 used)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages/summary/{{policy_id}}/{{benefit_opd_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages", "summary", "{{policy_id}}", "{{benefit_opd_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Usage Summary - Lab Test (1 of 6 used)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages/summary/{{policy_id}}/{{benefit_lab_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages", "summary", "{{policy_id}}", "{{benefit_lab_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Usage Summary - Hospitalization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages/summary/{{policy_id}}/{{benefit_hosp_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages", "summary", "{{policy_id}}", "{{benefit_hosp_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Usage Summary - Pharmacy (0 used)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/benefit-usages/summary/{{policy_id}}/{{benefit_pharmacy_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "benefit-usages", "summary", "{{policy_id}}", "{{benefit_pharmacy_id}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
