@@ -1,4 +1,5 @@
-import { LayoutDashboard, ArrowLeftRight, CreditCard, Shield, Users, Heart } from 'lucide-react';
+import { LayoutDashboard, ArrowLeftRight, CreditCard, Shield, Users } from 'lucide-react';
+import aarokyaLogo from '../assets/aarokya-logo.svg';
 
 const navItems = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
@@ -16,11 +17,8 @@ interface SidebarProps {
 export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
   return (
     <aside className="w-64 bg-sidebar min-h-screen flex flex-col">
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-          <Heart className="w-5 h-5 text-white" />
-        </div>
-        <span className="text-white text-xl font-bold tracking-tight">Aarokya</span>
+      <div className="p-6 flex items-center">
+        <img src={aarokyaLogo} alt="Aarokya" className="h-8 brightness-0 invert" />
       </div>
 
       <nav className="flex-1 px-3 mt-2">
